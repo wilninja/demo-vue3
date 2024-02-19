@@ -20,7 +20,7 @@
       <hr />
       <p class="github-resource">
         You can find the source code here
-        <a href="https://github.com/wilninja/wilninja" target="_blank"
+        <a href="https://github.com/wilninja/demo-vue3" target="_blank"
           >GitHub WilNinja</a
         >
       </p>
