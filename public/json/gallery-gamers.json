@@ -1,0 +1,28 @@
+{
+  "gallery": [
+    {
+      "id": 1,
+      "src": "/img/gallery/gamers/1.jpg",
+      "title": "Android Of Honor",
+      "description": "Pretium magna accumsan. Donec nec sodales justo. Morbi at nisi id nibh dignissim vestibulum eget non nisi. "
+    },
+    {
+      "id": 2,
+      "src": "/img/gallery/gamers/2.jpg",
+      "title": "Commander From The UFO",
+      "description": "Lacinia quis diam interdum mattis. Integer pretium libero dolor."
+    },
+    {
+      "id": 3,
+      "src": "/img/gallery/gamers/3.jpg",
+      "title": "Captains Of The Void",
+      "description": "Quisque a massa gravida risus finibus volutpat vitae sed nisi. Donec eget sapien id sem fermentum vehicula."
+    },
+    {
+      "id": 4,
+      "src": "/img/gallery/gamers/4.jpg",
+      "title": "Medics Of New Worlds",
+      "description": "Aenean quis dignissim dui. Curabitur volutpat interdum diam sit amet congue. Aenean in rhoncus lorem."
+    }
+  ]
+}

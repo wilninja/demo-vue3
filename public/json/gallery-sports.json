@@ -1,0 +1,39 @@
+{
+  "gallery": [
+    {
+      "id": 1,
+      "src": "/img/gallery/sports/1.jpg",
+      "title": "Champion at Heart",
+      "description":
+        "Ut sit amet convallis mi. Sed nec orci dignissim lectus tristique laoreet. Morbi posuere leo non neque faucibus sagittis. Integer iaculis orci eu magna laoreet scelerisque."
+    },
+    {
+      "id": 2,
+      "src": "/img/gallery/sports/2.jpg",
+      "title": "Rising to Greatness",
+      "description":
+        "Nulla mauris urna, tincidunt vitae commodo eget, cursus nec sapien."
+    },
+    {
+      "id": 3,
+      "src": "/img/gallery/sports/3.jpg",
+      "title": "Breaking Records and Making History",
+      "description":
+        "Cras ut porttitor lorem. Phasellus tellus nibh, iaculis a augue at, fermentum faucibus massa."
+    },
+    {
+      "id": 4,
+      "src": "/img/gallery/sports/4.jpg",
+      "title": "Born to Win",
+      "description":
+        "Etiam eleifend ligula vel tincidunt fermentum. Aenean ut arcu eget ligula consectetur sodales."
+    },
+    {
+      "id": 5,
+      "src": "/img/gallery/sports/5.jpg",
+      "title": "From Underdog to Champion",
+      "description":
+        "Proin leo enim, blandit ut lobortis vel, sollicitudin quis ipsum."
+    }
+  ]
+}

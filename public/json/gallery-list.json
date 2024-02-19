@@ -1,0 +1,19 @@
+{
+  "galleryList": [
+    {
+      "id": 1,
+      "path": "sports",
+      "title": "Sports"
+    },
+    {
+      "id": 2,
+      "path": "cars",
+      "title": "Cars"
+    },
+    {
+      "id": 3,
+      "path": "portraits",
+      "title": "Portraits"
+    }
+  ]
+}
