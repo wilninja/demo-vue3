@@ -1,0 +1,28 @@
+$c-mine-shaft: #202020;
+$c-seashell: #f1f1f1;
+$c-elephant: #15354a;
+$c-bay-many: #22577a;
+$c-smalt-blue: #598392;
+
+$grid-breakpoints: (
+    xs: 320px,
+    sm: 576px,
+    md: 768px,
+    lg: 992px,
+) !default;
+
+@function breakpoint-min($name, $breakpoints: $grid-breakpoints) {
+  $min: map-get($breakpoints, $name);
+  @return if($min !=0, $min, null);
+}
+
+@mixin media-breakpoint-up($name, $breakpoints: $grid-breakpoints) {
+  $min: breakpoint-min($name, $breakpoints);
+  @if $min {
+      @media (min-width: $min) {
+          @content;
+      }
+  } @else {
+      @content;
+  }
+}
