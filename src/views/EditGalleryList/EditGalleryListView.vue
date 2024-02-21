@@ -1,59 +1,62 @@
 <template>
   <div class="edit-gallery-list-view">
-    <TitleHeader title="Edit Gallery List" />
-    <section class="form-section">
-      <p class="section-title">Add Gallery</p>
-      <form id="formGalleryList" @submit.prevent="onSubmit">
-        <p>
-          <label for="galleryPath">Path:</label>
-          <input
-            type="text"
-            name="galleryPath"
-            id="galleryPath"
-            v-model="galleryPath"
-            placeholder="Gallery Path"
-          />
-        </p>
-        <p>
-          <label for="galleryTitle">Title:</label>
-          <input
-            type="text"
-            name="galleryTitle"
-            id="galleryTitle"
-            v-model="galleryName"
-            placeholder="Gallery Title"
-          />
-        </p>
-        <p>
-          <input type="submit" value="Add" class="btn-add-gallery" />
-        </p>
-      </form>
+    <TitleHeader title="Edit Gallery List" class="title-section" />
+    <section class="add-section">
+      <div class="form-section">
+        <p class="section-title">Add Gallery</p>
+        <form
+          id="formGalleryList"
+          autocomplete="off"
+          @submit.prevent="onSubmit"
+        >
+          <p>
+            <label for="galleryPath">Path:</label>
+            <input
+              type="text"
+              name="galleryPath"
+              id="galleryPath"
+              v-model="galleryPath"
+              placeholder="Gallery Path"
+            />
+          </p>
+          <p>
+            <label for="galleryTitle">Title:</label>
+            <input
+              type="text"
+              name="galleryTitle"
+              id="galleryTitle"
+              v-model="galleryName"
+              placeholder="Gallery Title"
+            />
+          </p>
+          <p>
+            <input type="submit" value="Add" class="btn-add-gallery" />
+          </p>
+        </form>
+      </div>
+
+      <div class="example-gallery">
+        <p>Try these example:</p>
+        <ul>
+          <li>Path: <code>gamers</code> | Name: <code>Gamers</code></li>
+          <li>
+            Path: <code>restaurants</code> | Name: <code>Restaurants</code>
+          </li>
+        </ul>
+      </div>
+
+      <hr />
     </section>
 
-    <section class="example-gallery">
-      <p>Try these example:</p>
-      <ul>
-        <li>Path: <code>gamers</code> | Name: <code>Gamers</code></li>
-        <li>Path: <code>restaurant</code> | Name: <code>Restaurants</code></li>
-      </ul>
-    </section>
-
-    <hr />
-
-    <section class="gallery-listing-section">
+    <section class="delete-section">
       <p class="section-title">Delete Gallery</p>
-      <ul>
-        <li v-for="gallery in galleryList" :key="gallery.id">
-          <button
-            class="btn-delete-gallery"
-            @click="onDeleteGallery(gallery.id)"
-          >
-            X
-          </button>
-          <strong>{{ gallery.title }}:</strong>
-          <code>{{ gallery.path }}</code>
-        </li>
-      </ul>
+      <p v-for="gallery in galleryList" :key="gallery.id">
+        <button class="btn-delete-gallery" @click="onDeleteGallery(gallery.id)">
+          X
+        </button>
+        <strong>{{ gallery.title }}:</strong>
+        <code>{{ gallery.path }}</code>
+      </p>
     </section>
   </div>
 </template>
@@ -77,15 +80,15 @@ const onDeleteGallery = (galleryID) => {
 
 const onSubmit = () => {
   if (!galleryPath.value || !galleryName.value) {
-    alert("please fill in the fields");
+    alert("Please fill in the fields");
     return;
   }
 
   const galleryID = generateNewID();
   const newGalleryItem = {
     id: galleryID,
-    path: galleryPath.value.toLowerCase(),
-    title: galleryName.value,
+    path: galleryPath.value.toLowerCase().trim(),
+    title: galleryName.value.trim(),
   };
   submitNewGallery(newGalleryItem);
 };
@@ -97,30 +100,28 @@ const submitNewGallery = (value) => {
 
   /**
    * This would work with Mutations via store.commit
-   * This is a simple example of going with Actions via store.dispatch
+   * This is an example of going with Actions via store.dispatch
    */
   if (result.length === 0 && store.dispatch("processAddGallery", value)) {
     galleryPath.value = "";
     galleryName.value = "";
   } else {
-    alert("There was an error");
+    alert("Error: Could not add gallery");
   }
 };
 
 function generateNewID() {
   const currentDate = new Date();
   const year = currentDate.getFullYear();
-  const month = currentDate.getMonth() + 1;
-  const day = currentDate.getDate();
-  const hour = currentDate.getHours();
-  const minutes = currentDate.getMinutes();
-  const seconds = currentDate.getSeconds();
-  const milliseconds = currentDate.getMilliseconds();
+  const month = pad(currentDate.getMonth() + 1);
+  const day = pad(currentDate.getDate());
+  const hour = pad(currentDate.getHours());
+  const minutes = pad(currentDate.getMinutes());
+  const seconds = pad(currentDate.getSeconds());
+  const milliseconds = pad(currentDate.getMilliseconds(), 3);
 
   return parseInt(
-    `${year}${pad(month)}${pad(day)}${pad(hour)}${pad(minutes)}${pad(
-      seconds
-    )}${pad(milliseconds, 3)}`
+    `${year}${month}${day}${hour}${minutes}${seconds}${milliseconds}`
   );
 }
 
@@ -133,55 +134,69 @@ function pad(number, width = 2) {
 </script>
 
 <style lang="scss" scoped>
-.example-gallery {
-  font-size: 12px;
+@import "../../assets/scss/helpers.scss";
 
-  p {
-    margin: 0;
-    font-weight: bold;
+.edit-gallery-list-view {
+  display: grid;
+  width: 100%;
+  grid-template-areas:
+    "title-section"
+    "add-section"
+    "delete-section";
+  grid-template-columns: 1fr;
+  grid-template-rows: auto auto auto;
+
+  @include media-breakpoint-up(md) {
+    grid-template-areas:
+      "title-section title-section"
+      "add-section delete-section";
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
   }
 
-  ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+  .title-section {
+    grid-area: title-section;
+  }
+  .add-section {
+    grid-area: add-section;
+  }
+  .delete-section {
+    grid-area: delete-section;
   }
 }
 
-.section-title {
-  font-size: 18px;
-  font-weight: bold;
-}
+.add-section {
+  hr {
+    display: block;
 
-.form-section {
-  .btn-add-gallery {
-    display: inline-block;
-    margin: 0 7px 0 0;
-    background-color: #dee2e6;
-    border: 1px solid #202020;
-    border-radius: 5px;
-    font-weight: bold;
-    cursor: pointer;
-
-    &:hover {
-      background-color: #4f772d;
-      color: #fff;
+    @include media-breakpoint-up(md) {
+      display: none;
     }
   }
 }
 
-.gallery-listing-section {
+.delete-section {
   .btn-delete-gallery {
     display: inline-block;
+    position: relative;
     margin: 0 7px 0 0;
-    background-color: #dee2e6;
-    border: 1px solid #202020;
-    border-radius: 5px;
-    font-weight: bold;
+    padding: 7px 14px;
+    border: 0px solid $c-mine-shaft;
+    border-width: 0px 0px 3px 0px;
+    background: #d90429;
+    background: linear-gradient(180deg, #d90429 0%, #8d031b 100%);
+    font-size: 14px;
+    font-weight: 900;
+    line-height: 14px;
+    color: $c-mine-shaft;
+    text-transform: uppercase;
+    white-space: nowrap;
+    cursor: pointer;
 
     &:hover {
-      background-color: #d90429;
-      color: #fff;
+      background: #8d031b;
+      background: linear-gradient(180deg, #8d031b 0%, #530210 100%);
+      color: $c-seashell;
     }
   }
 
@@ -198,5 +213,67 @@ function pad(number, width = 2) {
       }
     }
   }
+}
+
+.example-gallery {
+  font-size: 12px;
+
+  p {
+    margin: 0;
+    font-weight: bold;
+  }
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+.form-section {
+  .btn-add-gallery {
+    display: inline-block;
+    position: relative;
+    padding: 7px 14px;
+    border: 0px solid $c-mine-shaft;
+    border-width: 0px 0px 3px 0px;
+    background: $c-seashell;
+    background: linear-gradient(180deg, $c-seashell 0%, #d4d4d4 100%);
+    font-size: 14px;
+    font-weight: 900;
+    line-height: 14px;
+    color: $c-mine-shaft;
+    text-transform: uppercase;
+    white-space: nowrap;
+    cursor: pointer;
+
+    &:hover {
+      background: #4f772d;
+      background: linear-gradient(180deg, #76b243 0%, #4f772d 100%);
+      color: $c-seashell;
+    }
+  }
+
+  label {
+    display: inline-block;
+    width: 50px;
+  }
+
+  input {
+    &:focus {
+      outline: none;
+    }
+
+    &::placeholder {
+      font-size: 10px;
+      font-style: italic;
+    }
+  }
+}
+
+.section-title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: bold;
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <header class="top-bar">
-    <div class="logo-container">
-      <LogoIcon class="logo-top-bar" v-if="isLogin()" />
+    <div class="logo-container" v-if="isLogin()">
+      <LogoIcon class="logo-top-bar" />
     </div>
 
     <nav class="main-nav">
@@ -53,31 +53,64 @@ function isLogin() {
 </script>
 
 <style lang="scss" scoped>
+@import "../../assets/scss/helpers.scss";
+
 .top-bar {
-  display: flex;
-  align-items: center;
+  display: grid;
+  grid-template-areas:
+    "logo-container"
+    "main-nav";
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr;
   position: relative;
-  z-index: 2;
+  width: 100%;
+  z-index: 20;
   padding: 0 14px;
-  background-color: #202020;
-  background-color: rgba(#202020, 80%);
+  background-color: $c-mine-shaft;
+  background-color: rgba($c-mine-shaft, 80%);
+
+  @include media-breakpoint-up(lg) {
+    grid-template-areas: "logo-container main-nav";
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto;
+  }
 }
 
 .logo-container {
-  flex: 0 0 100px;
-  padding: 14px 0;
+  display: flex;
+  grid-area: logo-container;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  align-content: center;
+  padding: 7px 0;
+
+  .logo-top-bar {
+    width: 80px;
+  }
 }
 
 .main-nav {
-  flex: 1;
-  margin: 0;
-  padding: 0;
-  text-align: right;
+  display: flex;
+  grid-area: main-nav;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  align-content: center;
+  gap: 7px 21px;
+  min-height: 50px;
+  margin: 0 0 7px;
+  padding: 0 21px;
+
+  @include media-breakpoint-up(lg) {
+    justify-content: flex-end;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+  }
 
   span {
     display: inline-block;
-    margin: 0 0 0 21px;
-    padding: 14px 0;
 
     &:first-child {
       margin: 0;
@@ -85,11 +118,11 @@ function isLogin() {
   }
 
   a {
-    color: #f1f1f1;
+    color: $c-seashell;
     text-decoration: none;
 
     &:hover {
-      color: #598392;
+      color: $c-smalt-blue;
     }
   }
 }

@@ -14,9 +14,11 @@ defineProps({
 </script>
 
 <style lang="scss" scoped>
+@import "../../assets/scss/helpers.scss";
+
 h2 {
-  color: #15354a;
-  font-size: 24px;
+  color: $c-elephant;
+  font-size: 21px;
   font-weight: bold;
 }
 </style>

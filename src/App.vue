@@ -1,9 +1,10 @@
 <template>
-  <div class="background-pattern"></div>
   <TopBar />
   <div class="wrapper">
     <router-view class="container" />
   </div>
+  <div class="background-img"></div>
+  <div class="background-pattern"></div>
 </template>
 
 <script setup>
@@ -27,18 +28,16 @@ const resultGalleryList = async () => {
     });
 };
 
-function demandGalleryList() {
-  resultGalleryList();
-}
-
 onMounted(() => {
   if (store.getters.getGalleryList.length === 0) {
-    demandGalleryList();
+    resultGalleryList();
   }
 });
 </script>
 
 <style lang="scss">
+@import "./assets/scss/helpers.scss";
+
 * {
   box-sizing: border-box;
 }
@@ -49,13 +48,23 @@ body {
 }
 
 #app {
-  min-height: 100vh;
-  background: #202020 url("./assets/img/background.jpg") no-repeat center center;
-  background-size: cover;
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
+}
+
+.background-img {
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 100%;
+  min-height: 100vh;
+  background: $c-mine-shaft url("./assets/img/background.jpg") no-repeat center
+    center;
+  background-size: cover;
 }
 
 .background-pattern {
@@ -63,7 +72,7 @@ body {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 1;
+  z-index: 2;
   width: 100%;
   min-height: 100vh;
   background: transparent url("./assets/img/bg-pattern.png") repeat center
@@ -72,13 +81,13 @@ body {
 
 .container {
   position: relative;
-  z-index: 3;
+  z-index: 30;
   left: 50%;
   transform: translateX(-50%);
   width: 100%;
-  max-width: 980px;
+  max-width: 1200px;
   padding: 14px;
-  background-color: #f1f1f1;
+  background-color: $c-seashell;
   background: rgba(255, 255, 255, 0.55);
   border: 1px solid rgba(255, 255, 255, 0.5);
   border-radius: 16px;
@@ -94,11 +103,11 @@ body {
 
 a {
   font-weight: bold;
-  color: #22577a;
+  color: $c-bay-many;
   text-decoration: none;
 
   &:hover {
-    color: #598392;
+    color: $c-smalt-blue;
   }
 }
 
@@ -107,7 +116,7 @@ button {
 }
 
 hr {
-  border: 7px solid #22577a;
+  border: 7px solid $c-bay-many;
   border-radius: 5px;
 }
 </style>

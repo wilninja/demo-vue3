@@ -18,12 +18,26 @@ defineProps({
 </script>
 
 <style lang="scss" scoped>
+@import "../../assets/scss/helpers.scss";
+
 .pic-card {
   position: relative;
-  flex: 0 0 calc(25% - 14px);
+  flex: 0 0 calc(100% - 14px);
   margin: 7px;
-  background-color: #fff;
+  background-color: $c-seashell;
   text-align: center;
+
+  @include media-breakpoint-up(sm) {
+    flex: 0 0 calc(50% - 14px);
+  }
+
+  @include media-breakpoint-up(md) {
+    flex: 0 0 calc(33.33% - 14px);
+  }
+
+  @include media-breakpoint-up(lg) {
+    flex: 0 0 calc(25% - 14px);
+  }
 }
 
 .pic-description {
