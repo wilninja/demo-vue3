@@ -13,11 +13,7 @@
 
 > [!WARNING]
 > More updates will be pushed in the coming future.
-> - [ ] Responsive support
-> - [ ] Better design
-> - [ ] Upgrades on the UI/UX
 > - [ ] Breakdown the .vue file into multiple files: `.vue`, `.js`, `.scss`
-> - [ ] Stricter validations
 
 ## Project setup
 ```
